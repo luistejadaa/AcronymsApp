@@ -13,33 +13,36 @@ protocol BaseViewControllerDelegate: AnyObject {
 }
 
 class BaseViewController: UIViewController {
+    let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = .mainBlack
+        return indicator
+    }()
+    
     weak var delegate: BaseViewControllerDelegate?
-    var hasMenuButton: Bool = false
-    var titleLabelTopConstraint: NSLayoutConstraint!
-    let titleLabel: UILabel = {
+    
+    private let titleLabel: UILabel = {
         return CommonControls.generateTitleLabel()
     }()
     
-    let subTitleLabel: UILabel = {
-        return CommonControls.generateSubtitleLabel(textAligment: .left)
-    }()
-    
-    convenience init(title: String?, hasMenuButton: Bool) {
+    convenience init(title: String?) {
         self.init()
         self.title = title
-        self.hasMenuButton = hasMenuButton
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        view.addSubviews(titleLabel, subTitleLabel)
+        view.addSubviews(titleLabel, activityIndicator)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide),
                                                name: UIResponder.keyboardWillHideNotification, object: nil)
+        setupConstraints()
     }
     
     deinit {
@@ -67,7 +70,6 @@ class BaseViewController: UIViewController {
                 controls.append(subview as? UIControl ?? UIControl())
             }
         }
-        
         return controls
     }
     
@@ -102,19 +104,20 @@ class BaseViewController: UIViewController {
     }
     
     func setupConstraints() {
-        titleLabelTopConstraint = titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16)
         NSLayoutConstraint.activate([
-            titleLabelTopConstraint,
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             titleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 0)
         ])
         
         NSLayoutConstraint.activate([
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
-            subTitleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            subTitleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            subTitleLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 0)
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    func setTitle(_ title: String) {
+        titleLabel.text = title
     }
 }

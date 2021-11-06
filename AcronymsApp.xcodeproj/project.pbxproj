@@ -10,7 +10,6 @@
 		05B3690D44516A3715E0B56C /* Pods_AcronymsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 091353FC6F9365EC3B782737 /* Pods_AcronymsApp.framework */; };
 		D88A448A2734416500AC7418 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44892734416500AC7418 /* AppDelegate.swift */; };
 		D88A448C2734416500AC7418 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A448B2734416500AC7418 /* SceneDelegate.swift */; };
-		D88A448E2734416500AC7418 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A448D2734416500AC7418 /* ViewController.swift */; };
 		D88A44962734416700AC7418 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D88A44952734416700AC7418 /* Assets.xcassets */; };
 		D88A44992734416700AC7418 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D88A44972734416700AC7418 /* LaunchScreen.storyboard */; };
 		D88A44A42735C1B700AC7418 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44A32735C1B700AC7418 /* BaseViewController.swift */; };
@@ -23,6 +22,15 @@
 		D88A44B4273612D800AC7418 /* UIViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44B3273612D800AC7418 /* UIViewBuilder.swift */; };
 		D88A44B62736136900AC7418 /* CommonControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44B52736136900AC7418 /* CommonControls.swift */; };
 		D88A44B82736138C00AC7418 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44B72736138C00AC7418 /* UIColor+Extension.swift */; };
+		D88A44C12736275700AC7418 /* BaseWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44BB2736275700AC7418 /* BaseWireframe.swift */; };
+		D88A44C42736275700AC7418 /* PresenterInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44BE2736275700AC7418 /* PresenterInterface.swift */; };
+		D88A44C52736275700AC7418 /* ViewInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44BF2736275700AC7418 /* ViewInterface.swift */; };
+		D88A44C62736275700AC7418 /* InteractorInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44C02736275700AC7418 /* InteractorInterface.swift */; };
+		D88A44CC2736289700AC7418 /* HomeInterfaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44C72736289700AC7418 /* HomeInterfaces.swift */; };
+		D88A44CD2736289700AC7418 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44C82736289700AC7418 /* HomePresenter.swift */; };
+		D88A44CE2736289700AC7418 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44C92736289700AC7418 /* HomeViewController.swift */; };
+		D88A44CF2736289700AC7418 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44CA2736289700AC7418 /* HomeInteractor.swift */; };
+		D88A44D02736289700AC7418 /* HomeWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44CB2736289700AC7418 /* HomeWireframe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +40,6 @@
 		D88A44862734416500AC7418 /* AcronymsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcronymsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D88A44892734416500AC7418 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D88A448B2734416500AC7418 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D88A448D2734416500AC7418 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		D88A44952734416700AC7418 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D88A44982734416700AC7418 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D88A449A2734416700AC7418 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -46,6 +53,15 @@
 		D88A44B3273612D800AC7418 /* UIViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewBuilder.swift; sourceTree = "<group>"; };
 		D88A44B52736136900AC7418 /* CommonControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonControls.swift; sourceTree = "<group>"; };
 		D88A44B72736138C00AC7418 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		D88A44BB2736275700AC7418 /* BaseWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWireframe.swift; sourceTree = "<group>"; };
+		D88A44BE2736275700AC7418 /* PresenterInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterInterface.swift; sourceTree = "<group>"; };
+		D88A44BF2736275700AC7418 /* ViewInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewInterface.swift; sourceTree = "<group>"; };
+		D88A44C02736275700AC7418 /* InteractorInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractorInterface.swift; sourceTree = "<group>"; };
+		D88A44C72736289700AC7418 /* HomeInterfaces.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInterfaces.swift; sourceTree = "<group>"; };
+		D88A44C82736289700AC7418 /* HomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		D88A44C92736289700AC7418 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		D88A44CA2736289700AC7418 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
+		D88A44CB2736289700AC7418 /* HomeWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWireframe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,7 +120,6 @@
 				D88A44A02735C16900AC7418 /* Utils */,
 				D88A44892734416500AC7418 /* AppDelegate.swift */,
 				D88A448B2734416500AC7418 /* SceneDelegate.swift */,
-				D88A448D2734416500AC7418 /* ViewController.swift */,
 				D88A44952734416700AC7418 /* Assets.xcassets */,
 				D88A44972734416700AC7418 /* LaunchScreen.storyboard */,
 				D88A449A2734416700AC7418 /* Info.plist */,
@@ -123,6 +138,7 @@
 		D88A44A12735C17900AC7418 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				D88A44BA273623D500AC7418 /* Home */,
 				D88A44A22735C18E00AC7418 /* Common */,
 			);
 			path = Modules;
@@ -131,6 +147,10 @@
 		D88A44A22735C18E00AC7418 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D88A44BB2736275700AC7418 /* BaseWireframe.swift */,
+				D88A44BE2736275700AC7418 /* PresenterInterface.swift */,
+				D88A44BF2736275700AC7418 /* ViewInterface.swift */,
+				D88A44C02736275700AC7418 /* InteractorInterface.swift */,
 				D88A44A32735C1B700AC7418 /* BaseViewController.swift */,
 			);
 			path = Common;
@@ -156,6 +176,18 @@
 				D88A44B3273612D800AC7418 /* UIViewBuilder.swift */,
 			);
 			path = Builders;
+			sourceTree = "<group>";
+		};
+		D88A44BA273623D500AC7418 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				D88A44C72736289700AC7418 /* HomeInterfaces.swift */,
+				D88A44C82736289700AC7418 /* HomePresenter.swift */,
+				D88A44C92736289700AC7418 /* HomeViewController.swift */,
+				D88A44CA2736289700AC7418 /* HomeInteractor.swift */,
+				D88A44CB2736289700AC7418 /* HomeWireframe.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -291,9 +323,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D88A448E2734416500AC7418 /* ViewController.swift in Sources */,
+				D88A44CD2736289700AC7418 /* HomePresenter.swift in Sources */,
+				D88A44C62736275700AC7418 /* InteractorInterface.swift in Sources */,
 				D88A44AB2735C4B200AC7418 /* UIView+Extension.swift in Sources */,
 				D88A44A72735C2F900AC7418 /* UIAlertController+Extension.swift in Sources */,
+				D88A44C52736275700AC7418 /* ViewInterface.swift in Sources */,
+				D88A44CE2736289700AC7418 /* HomeViewController.swift in Sources */,
 				D88A44A42735C1B700AC7418 /* BaseViewController.swift in Sources */,
 				D88A44B62736136900AC7418 /* CommonControls.swift in Sources */,
 				D88A44B02736128800AC7418 /* ButtonBuilder.swift in Sources */,
@@ -301,7 +336,12 @@
 				D88A44B2273612B600AC7418 /* LabelBuilder.swift in Sources */,
 				D88A44B4273612D800AC7418 /* UIViewBuilder.swift in Sources */,
 				D88A44A92735C3CE00AC7418 /* String+Extension.swift in Sources */,
+				D88A44C42736275700AC7418 /* PresenterInterface.swift in Sources */,
+				D88A44D02736289700AC7418 /* HomeWireframe.swift in Sources */,
 				D88A44B82736138C00AC7418 /* UIColor+Extension.swift in Sources */,
+				D88A44CC2736289700AC7418 /* HomeInterfaces.swift in Sources */,
+				D88A44C12736275700AC7418 /* BaseWireframe.swift in Sources */,
+				D88A44CF2736289700AC7418 /* HomeInteractor.swift in Sources */,
 				D88A448C2734416500AC7418 /* SceneDelegate.swift in Sources */,
 				D88A44AE2736124A00AC7418 /* Builder.swift in Sources */,
 			);

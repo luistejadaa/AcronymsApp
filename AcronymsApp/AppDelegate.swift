@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                    return true
                } else {
                    window = UIWindow(frame: UIScreen.main.bounds)
-                   window?.rootViewController = BaseViewController()
+                   window?.rootViewController = HomeViewController()
                    window?.makeKeyAndVisible()
                    return true
                }
