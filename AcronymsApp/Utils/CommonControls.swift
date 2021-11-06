@@ -22,10 +22,10 @@ final class CommonControls {
             .cornerRadius(6)
             .accessibilityIdentifier(accessibilityIdentifier)
             .attributedTitle(NSMutableAttributedString(string: title, attributes:
-                                                    [
-                                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
-                                                        NSAttributedString.Key.foregroundColor: titleColor
-                                                    ]), for: .normal)
+                                                        [
+                                                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16),
+                                                            NSAttributedString.Key.foregroundColor: titleColor
+                                                        ]), for: .normal)
             .build()
     }
     
@@ -49,7 +49,7 @@ final class CommonControls {
         LabelBuilder(frame: .zero)
             .text(text)
             .textColor(.mainBlack)
-            .font(UIFont.boldSystemFont(ofSize: 30))
+            .font(UIFont.boldSystemFont(ofSize: 32))
             .build()
     }
     
@@ -59,7 +59,7 @@ final class CommonControls {
     static func generateSubtitleLabel(with text: String = String.empty, textAligment: NSTextAlignment) -> UILabel {
         LabelBuilder(frame: .zero)
             .text(text)
-            .textColor(.mainBlack)
+            .textColor(.label)
             .font(UIFont.boldSystemFont(ofSize: 20))
             .textAlignment(textAligment)
             .build()
@@ -71,7 +71,7 @@ final class CommonControls {
     static func generateInfoLabel(with text: String) -> UILabel {
         LabelBuilder(frame: .zero)
             .text(text)
-            .textColor(.mainBlack)
+            .textColor(.label)
             .font(UIFont.systemFont(ofSize: 16))
             .build()
     }
@@ -95,11 +95,35 @@ final class CommonControls {
     ///   - cellClass: the cell type for register
     ///   - identifier: identifier for reusable cell
     /// - Returns: UIButton
-    static func generateTableView(style: UITableView.Style, cellClass: AnyClass, identifier: String) -> UITableView {
-        
-        let tableView = UITableView(frame: .zero, style: style)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(cellClass, forCellReuseIdentifier: identifier)
-        return tableView
+    static func generateCollectionView(cellClass: AnyClass, identifier: String) -> UICollectionView {
+        let layout = UICollectionViewFlowLayout()
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(cellClass, forCellWithReuseIdentifier: identifier)
+        return collectionView
+    }
+    
+    /// Called for generate an UIActivityIndicatorView
+    /// - Parameters:
+    ///   - style: the style for the activity
+    /// - Returns: UIActivityIndicatorView
+    static func generateActivityIndicatore(_ style: UIActivityIndicatorView.Style) -> UIActivityIndicatorView {
+        let indicator = UIActivityIndicatorView(style: style)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.color = .mainBlack
+        return indicator
+    }
+    
+    /// Called for generate an UISearchTextField
+    /// - Parameters:
+    ///   - placeholder: the placeholder for the search text field
+    /// - Returns: UISearchTextField
+    static func generateSearchTextField(placeholder: String) -> UISearchTextField {
+        let searchTextField = SearchTextFieldBuilder(placeHolder: placeholder)
+            .heightConstraint(40)
+            .keyboardType(.default)
+            .returnType(.search)
+            .build()
+        return searchTextField
     }
 }

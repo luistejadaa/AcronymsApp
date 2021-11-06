@@ -31,6 +31,8 @@
 		D88A44CE2736289700AC7418 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44C92736289700AC7418 /* HomeViewController.swift */; };
 		D88A44CF2736289700AC7418 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44CA2736289700AC7418 /* HomeInteractor.swift */; };
 		D88A44D02736289700AC7418 /* HomeWireframe.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44CB2736289700AC7418 /* HomeWireframe.swift */; };
+		D88A44D327369C4000AC7418 /* SearchTextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44D227369C4000AC7418 /* SearchTextFieldBuilder.swift */; };
+		D88A44D52736C42700AC7418 /* AcronymViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D88A44D42736C42700AC7418 /* AcronymViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,8 @@
 		D88A44C92736289700AC7418 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		D88A44CA2736289700AC7418 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 		D88A44CB2736289700AC7418 /* HomeWireframe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWireframe.swift; sourceTree = "<group>"; };
+		D88A44D227369C4000AC7418 /* SearchTextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldBuilder.swift; sourceTree = "<group>"; };
+		D88A44D42736C42700AC7418 /* AcronymViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcronymViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +120,7 @@
 			children = (
 				D88A44AC2736122000AC7418 /* Builders */,
 				D88A44A52735C2E500AC7418 /* Extensions */,
-				D88A44A12735C17900AC7418 /* Modules */,
+				D88A44A12735C17900AC7418 /* Scenes */,
 				D88A44A02735C16900AC7418 /* Utils */,
 				D88A44892734416500AC7418 /* AppDelegate.swift */,
 				D88A448B2734416500AC7418 /* SceneDelegate.swift */,
@@ -135,18 +139,19 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		D88A44A12735C17900AC7418 /* Modules */ = {
+		D88A44A12735C17900AC7418 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				D88A44BA273623D500AC7418 /* Home */,
 				D88A44A22735C18E00AC7418 /* Common */,
 			);
-			path = Modules;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		D88A44A22735C18E00AC7418 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				D88A44D12736981500AC7418 /* Views */,
 				D88A44BB2736275700AC7418 /* BaseWireframe.swift */,
 				D88A44BE2736275700AC7418 /* PresenterInterface.swift */,
 				D88A44BF2736275700AC7418 /* ViewInterface.swift */,
@@ -174,6 +179,7 @@
 				D88A44AF2736128800AC7418 /* ButtonBuilder.swift */,
 				D88A44B1273612B600AC7418 /* LabelBuilder.swift */,
 				D88A44B3273612D800AC7418 /* UIViewBuilder.swift */,
+				D88A44D227369C4000AC7418 /* SearchTextFieldBuilder.swift */,
 			);
 			path = Builders;
 			sourceTree = "<group>";
@@ -188,6 +194,14 @@
 				D88A44CB2736289700AC7418 /* HomeWireframe.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		D88A44D12736981500AC7418 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D88A44D42736C42700AC7418 /* AcronymViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,6 +342,7 @@
 				D88A44AB2735C4B200AC7418 /* UIView+Extension.swift in Sources */,
 				D88A44A72735C2F900AC7418 /* UIAlertController+Extension.swift in Sources */,
 				D88A44C52736275700AC7418 /* ViewInterface.swift in Sources */,
+				D88A44D327369C4000AC7418 /* SearchTextFieldBuilder.swift in Sources */,
 				D88A44CE2736289700AC7418 /* HomeViewController.swift in Sources */,
 				D88A44A42735C1B700AC7418 /* BaseViewController.swift in Sources */,
 				D88A44B62736136900AC7418 /* CommonControls.swift in Sources */,
@@ -342,6 +357,7 @@
 				D88A44CC2736289700AC7418 /* HomeInterfaces.swift in Sources */,
 				D88A44C12736275700AC7418 /* BaseWireframe.swift in Sources */,
 				D88A44CF2736289700AC7418 /* HomeInteractor.swift in Sources */,
+				D88A44D52736C42700AC7418 /* AcronymViewCell.swift in Sources */,
 				D88A448C2734416500AC7418 /* SceneDelegate.swift in Sources */,
 				D88A44AE2736124A00AC7418 /* Builder.swift in Sources */,
 			);

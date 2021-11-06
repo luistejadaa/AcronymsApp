@@ -44,7 +44,7 @@ extension UIViewBuilder {
     func heightConstraint(_ constant: CGFloat) -> Self {
         return self
     }
-    
+
     func accessibilityIdentifier(_ identifier: String?) -> Self {
         return  self
     }
