@@ -115,6 +115,7 @@ final class HomeViewController: BaseViewController {
         }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCollectionView))
+        tapGesture.cancelsTouchesInView = false
         resultCollectionView.addGestureRecognizer(tapGesture)
         
         presenter.didLoad()
