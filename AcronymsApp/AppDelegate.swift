@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                    return true
                } else {
                    window = UIWindow(frame: UIScreen.main.bounds)
-                   window?.rootViewController = HomeViewController()
+                   let navigationController = UINavigationController(rootViewController: HomeWireframe().viewController)
+                   navigationController.isNavigationBarHidden = true
+                   window?.rootViewController = navigationController
                    window?.makeKeyAndVisible()
                    return true
                }

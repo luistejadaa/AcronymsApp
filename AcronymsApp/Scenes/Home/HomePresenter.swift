@@ -14,16 +14,20 @@ final class HomePresenter {
 
     // MARK: - Private properties -
 
-    private unowned let view: HomeViewInterface
-    private let interactor: HomeInteractorInterface
-    private let wireframe: HomeWireframeInterface
+    private let operationQueue: DispatchQueue = {
+        let queue = DispatchQueue(label: "apiQueue", qos: .userInteractive)
+        return queue
+    }()
+    private unowned let view: HomeViewProtocol
+    private let interactor: HomeInteractorProtocol
+    private let wireframe: HomeWireframeProtocol
 
     // MARK: - Lifecycle -
 
     init(
-        view: HomeViewInterface,
-        interactor: HomeInteractorInterface,
-        wireframe: HomeWireframeInterface
+        view: HomeViewProtocol,
+        interactor: HomeInteractorProtocol,
+        wireframe: HomeWireframeProtocol
     ) {
         self.view = view
         self.interactor = interactor
@@ -33,5 +37,25 @@ final class HomePresenter {
 
 // MARK: - Extensions -
 
-extension HomePresenter: HomePresenterInterface {
+extension HomePresenter: HomePresenterProtocol {
+    func didLoad() {
+        view.reload(data: [Acronyms]())
+    }
+    
+    func search(acronyms: String) {
+        operationQueue.async {
+            self.view.startActivity()
+            self.interactor.request(acronyms: acronyms)
+        }
+    }
+    
+    func didReceived(data: [Acronyms]) {
+        view.reload(data: data)
+        self.view.stopActivity()
+    }
+    
+    func didReceived(error: Error) {
+        self.view.presentError(message: error.localizedDescription)
+    }
+    
 }

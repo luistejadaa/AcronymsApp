@@ -1,29 +1,29 @@
 import UIKit
 
-protocol WireframeInterface: AnyObject {
+protocol WireframeProtocol: AnyObject {
+    
 }
 
-class BaseWireframe<BaseViewController> where BaseViewController: UIViewController {
+class BaseWireframe<ViewController> where ViewController: BaseViewController {
 
-    private unowned var _viewController: BaseViewController
-    
+    private unowned var _viewController: ViewController
     // to retain view controller reference upon first access
-    private var temporaryStoredViewController: BaseViewController?
+    private var temporaryStoredViewController: ViewController?
 
-    init(viewController: BaseViewController) {
+    init(viewController: ViewController) {
         temporaryStoredViewController = viewController
         _viewController = viewController
     }
 
 }
 
-extension BaseWireframe: WireframeInterface {
-
+extension BaseWireframe: WireframeProtocol {
+    
 }
 
 extension BaseWireframe {
     
-    var viewController: BaseViewController {
+    var viewController: ViewController {
         defer { temporaryStoredViewController = nil }
         return _viewController
     }

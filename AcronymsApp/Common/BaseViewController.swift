@@ -97,6 +97,18 @@ class BaseViewController: UIViewController {
         action()
     }
     
+    func startActivity() {
+        DispatchQueue.main.async {
+            self.activityIndicator.startAnimating()
+        }
+    }
+    
+    func stopActivity() {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+        }
+    }
+    
     func presentAlert(with title: String?, message: String?, actions: [UIAlertAction], completion: (() -> Void )?) {
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -123,7 +135,6 @@ class BaseViewController: UIViewController {
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-        
         additionalSafeAreaInsets.top = 56
     }
     

@@ -22,6 +22,7 @@ final class HomeWireframe: BaseWireframe<HomeViewController> {
 
         let interactor = HomeInteractor()
         let presenter = HomePresenter(view: moduleViewController, interactor: interactor, wireframe: self)
+        interactor.presenter = presenter
         moduleViewController.presenter = presenter
     }
 
@@ -29,5 +30,5 @@ final class HomeWireframe: BaseWireframe<HomeViewController> {
 
 // MARK: - Extensions -
 
-extension HomeWireframe: HomeWireframeInterface {
+extension HomeWireframe: HomeWireframeProtocol {
 }

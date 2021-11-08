@@ -7,12 +7,12 @@
 
 import Moya
 
-public enum AcronymsProvider {
-    static let getDescriptionsPath = "software/acromine/rest.html/software/acromine/dictionary.py"
+public enum AcronymsTarget {
+    static let getDescriptionsPath = Constants.getAcronymsPath
     case getDescriptions(acronyms: String)
 }
 
-extension AcronymsProvider: TargetType {
+extension AcronymsTarget: TargetType {
     
     public var baseURL: URL {
         switch self {
@@ -24,7 +24,7 @@ extension AcronymsProvider: TargetType {
     public var path: String {
         switch self {
         case .getDescriptions:
-            return AcronymsProvider.getDescriptionsPath
+            return AcronymsTarget.getDescriptionsPath
         }
     }
     
@@ -37,8 +37,8 @@ extension AcronymsProvider: TargetType {
     
     public var task: Task {
         switch self {
-        case .getDescriptions:
-            return .requestPlain
+        case .getDescriptions(let acronyms):
+            return .requestParameters(parameters: ["sf": acronyms], encoding: URLEncoding.default)
         }
     }
     
@@ -48,8 +48,8 @@ extension AcronymsProvider: TargetType {
     
     public var sampleData: Data {
         switch self {
-        case .getDescriptions:
-            return AcronymsMock.mock
+        case .getDescriptions(let acronyms):
+            return acronyms.isEmpty ? AcronymsMock.mockEmpty : AcronymsMock.mockWithData
         }
     }
 }

@@ -9,4 +9,5 @@ import Foundation
 
 struct Constants {
     static let baseURL = "http://www.nactem.ac.uk/"
+    static let getAcronymsPath = "software/acromine/dictionary.py"
 }

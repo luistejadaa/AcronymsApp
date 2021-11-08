@@ -12,6 +12,28 @@ import UIKit
 
 final class HomeViewController: BaseViewController {
     
+    var data: [Acronyms]!
+    
+    private let searchTextField: UISearchTextField = {
+        let textField = CommonControls.generateSearchTextField(placeholder: "Enter an Acromine")
+        textField.autocapitalizationType = .allCharacters
+        textField.autocorrectionType = .no
+        return textField
+    }()
+    
+    private var detailViewCloseButton: UIButton?
+    private var detailViewTitleLabel: UILabel?
+    private var detailViewSinceLabel: UILabel?
+    private var detailViewFreqLabel: UILabel?
+    
+    private let resultCollectionView: UICollectionView = {
+        let collectionView = CommonControls.generateCollectionView(cellClass: AcronymViewCell.self, identifier: "resultCell")
+        collectionView.backgroundColor = .clear
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.allowsMultipleSelection = false
+        return collectionView
+    }()
+    
     let effectView: UIVisualEffectView = {
         let effect = UIBlurEffect(style: .dark)
         let effectView = UIVisualEffectView(effect: effect)
@@ -33,37 +55,34 @@ final class HomeViewController: BaseViewController {
         let closeButton = UIButton(type: .custom)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
         closeButton.setImage(UIImage(named: "closeIcon")?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .normal)
+        let titleLabel = CommonControls.generateTitleLabel()
+        let sinceLabel = CommonControls.generateSubtitleLabel(textAligment: .right)
+        let freqLabel = CommonControls.generateSubtitleLabel(textAligment: .right)
         
-        view.addSubviews(closeButton)
+        view.addSubviews(closeButton, titleLabel, sinceLabel, freqLabel)
         
         NSLayoutConstraint.activate([
             closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
             closeButton.widthAnchor.constraint(equalToConstant: 32),
-            closeButton.heightAnchor.constraint(equalToConstant: 32)
+            closeButton.heightAnchor.constraint(equalToConstant: 32),
+            
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            sinceLabel.bottomAnchor.constraint(equalTo: freqLabel.topAnchor, constant: -8),
+            sinceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            sinceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            freqLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8),
+            freqLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            freqLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
         ])
-        
         return view
     }()
     
-    private let searchTextField: UISearchTextField = {
-        let textField = CommonControls.generateSearchTextField(placeholder: "Enter an Acromine")
-        textField.autocapitalizationType = .allCharacters
-        textField.autocorrectionType = .no
-        return textField
-    }()
-    
-    private let resultCollectionView: UICollectionView = {
-        let collectionView = CommonControls.generateCollectionView(cellClass: AcronymViewCell.self, identifier: "resultCell")
-        collectionView.backgroundColor = .clear
-        collectionView.showsVerticalScrollIndicator = false
-        collectionView.allowsMultipleSelection = false
-        return collectionView
-    }()
-    
-    // MARK: - Public properties -
-    
-    var presenter: HomePresenterInterface!
+    var presenter: HomePresenterProtocol!
     
     // MARK: - Lifecycle -
     
@@ -76,6 +95,7 @@ final class HomeViewController: BaseViewController {
         searchTextField.delegate = self
         resultCollectionView.delegate = self
         resultCollectionView.dataSource = self
+        searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
         if let layout = resultCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.minimumLineSpacing = 20
@@ -86,21 +106,37 @@ final class HomeViewController: BaseViewController {
             layout.itemSize = size
         }
         
-        if let closeButton = detailView.subviews.first as? UIButton {
+        detailViewCloseButton = detailView.subviews[0] as? UIButton
+        detailViewTitleLabel = detailView.subviews[1] as? UILabel
+        detailViewSinceLabel = detailView.subviews[2] as? UILabel
+        detailViewFreqLabel = detailView.subviews[3] as? UILabel
+        if let closeButton = detailViewCloseButton {
             closeButton.addTarget(self, action: #selector(pushCloseDetail), for: .touchUpInside)
         }
+        
+        presenter.didLoad()
     }
     
     @objc func pushCloseDetail() {
         if let indexPath = resultCollectionView.indexPathsForSelectedItems?.first, let cell = resultCollectionView.cellForItem(at: indexPath) {
             let rect = cell.convert(cell.bounds, to: self.view)
-            self.effectView.isHidden = true
+            self.detailViewTitleLabel?.isHidden = true
+            self.detailViewSinceLabel?.isHidden = true
+            self.detailViewFreqLabel?.isHidden = true
+            resultCollectionView.deselectItem(at: indexPath, animated: false)
             UIView.animate(withDuration: 0.1) {
                 self.detailView.frame = rect
             } completion: { _ in
                 self.detailView.isHidden = true
+                self.effectView.isHidden = true
+                
             }
-
+        }
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        if let text = textField.text {
+            presenter.search(acronyms: text)
         }
     }
     
@@ -134,10 +170,18 @@ final class HomeViewController: BaseViewController {
 
 // MARK: - Extensions -
 
-extension HomeViewController: HomeViewInterface {
+extension HomeViewController: HomeViewProtocol {
+    func reload(data: [Acronyms]) {
+        self.data = data
+        resultCollectionView.reloadData()
+    }
     
+    func presentError(message: String) {
+        self.presentAlert(with: "Error", message: message, actions: [UIAlertAction(title: "Continue", style: .default, handler: nil)], completion: nil)
+    }
 }
 
+// MARK: - UISearchTextFieldDelegate -
 extension HomeViewController: UISearchTextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
@@ -151,12 +195,12 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return data.count == 0 ? 0 : data[0].lfs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "resultCell", for: indexPath) as? AcronymViewCell {
-            cell.titleLabel.text = "\"Example mmg hola lorem ipsum sdjskl jdsdsl idsjlds jfdkfldsjl dhasjkdhsakj\""
+            cell.titleLabel.text = data[0].lfs[indexPath.row].lf
             return cell
         }
         return .init(frame: .zero)
@@ -170,7 +214,13 @@ extension HomeViewController: UICollectionViewDelegate {
             detailView.frame = rect
             self.effectView.alpha = 0
             self.effectView.isHidden = false
+            self.detailViewTitleLabel?.text = data[0].lfs[indexPath.row].lf
+            self.detailViewSinceLabel?.text = "Since: \(data[0].lfs[indexPath.row].since)"
+            self.detailViewFreqLabel?.text = "Occurrences of the definition : \(data[0].lfs[indexPath.row].freq)"
             self.detailView.isHidden = false
+            self.detailViewTitleLabel?.isHidden = false
+            self.detailViewSinceLabel?.isHidden = false
+            self.detailViewFreqLabel?.isHidden = false
             UIView.animate(withDuration: 0.4) {
                 self.effectView.alpha = 1
             }
