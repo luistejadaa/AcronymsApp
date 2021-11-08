@@ -114,7 +114,14 @@ final class HomeViewController: BaseViewController {
             closeButton.addTarget(self, action: #selector(pushCloseDetail), for: .touchUpInside)
         }
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapCollectionView))
+        resultCollectionView.addGestureRecognizer(tapGesture)
+        
         presenter.didLoad()
+    }
+    
+    @objc func tapCollectionView() {
+        view.endEditing(true)
     }
     
     @objc func pushCloseDetail() {
@@ -231,5 +238,9 @@ extension HomeViewController: UICollectionViewDelegate {
                 self.detailView.center = self.view.center
             })
         }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
 }
