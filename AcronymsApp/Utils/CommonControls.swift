@@ -122,7 +122,7 @@ final class CommonControls {
         let searchTextField = SearchTextFieldBuilder(placeHolder: placeholder)
             .heightConstraint(40)
             .keyboardType(.default)
-            .returnType(.search)
+            .returnType(.done)
             .build()
         return searchTextField
     }

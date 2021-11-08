@@ -67,7 +67,7 @@ final class HomeViewController: BaseViewController {
             closeButton.widthAnchor.constraint(equalToConstant: 32),
             closeButton.heightAnchor.constraint(equalToConstant: 32),
             
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 16),
+            titleLabel.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant: 8),
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
@@ -209,6 +209,7 @@ extension HomeViewController: UICollectionViewDataSource {
 
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        view.endEditing(true)
         if let cell = collectionView.cellForItem(at: indexPath) {
             let rect = cell.convert(cell.bounds, to: self.view)
             detailView.frame = rect
