@@ -21,7 +21,6 @@ class BaseViewController: UIViewController {
     }()
     
     weak var delegate: BaseViewControllerDelegate?
-    
     private let titleLabel: UILabel = {
         return CommonControls.generateTitleLabel()
     }()
@@ -38,7 +37,6 @@ class BaseViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide),
                                                name: UIResponder.keyboardWillHideNotification, object: nil)
         setupConstraints()
